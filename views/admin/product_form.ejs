@@ -1,0 +1,50 @@
+<div class="shared-create-page create-product-page">
+  <h1>Create product</h1>
+
+  <form class="create-form" action="/admin/product/create" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Product name</legend>
+      <label for="product_name">Product name</label>
+      <input type="text" id="product_name" name="product_name" required>
+    </fieldset>
+    <fieldset>
+      <legend>Product description</legend>
+      <label for="product_description">Product description</label>
+      <textarea type="text" id="product_description" name="product_description"  required></textarea>
+    </fieldset>
+    <fieldset>
+      <legend>Product category</legend>
+      <label for="product_category">Product category</label>
+      <select name="product_category" id="product_category" required>
+        <!-- loop categories -->
+        <option value="" disable selected hidden>Select category</option>
+        <% categories.map((e) => { %>
+          <option value=<%= e._id %>><%= e.name %></option>
+        <% }) %> >
+      </select>
+    </fieldset>
+    <fieldset>
+      <legend>Product price</legend>
+      <label for="product_price">Product price</label>
+      <input type="number" id="product_price" name="product_price" step=".01" required>
+    </fieldset>
+    <fieldset>
+      <legend>Product stock</legend>
+      <label for="product_stock">Product stock</label>
+      <input type="number" id="product_stock" name="product_stock" required>
+    </fieldset>
+    <fieldset>
+      <legend>Choose product image</legend>
+      <label for="product_image">Product image</label>
+      <!-- multer saves the image to public/images/uploads -->
+      <input type="file" name="product_image" id="product_image" required>
+    </fieldset>
+    <!-- hidden field to prevent spam from bots -->
+    <input type="text" name="anti_spam" style="display:none;">
+    <button class="form-button" type="submit">SUBMIT</button>
+    <% if (locals.err) { %>
+      <span style="color: red"><%= err[0].msg %></span>
+    <% } %> 
+  </form>
+</div>
+
